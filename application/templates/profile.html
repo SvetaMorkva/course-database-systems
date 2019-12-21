@@ -1,0 +1,78 @@
+<!doctype html>
+</html>
+<html>
+<head>
+    <style>
+        body {
+ 			background: url(https://365psd.ru/images/backgrounds/bg-light-4866.png) no-repeat center center fixed;
+ 			background-size: cover;
+ 			margin: 0;
+		    letter-spacing: 0.18em;
+		    font-family: 'URW Bookman L', serif;
+		    text-transform: uppercase;
+ 		}
+ 		aside {
+ 			position: absolute;
+ 			right: 20px;
+ 			top: 10px;
+ 		}
+		.button {
+		    border: 1px solid black;
+		    padding: 10px 15px;
+		    background-color: unset;
+		    color: black;
+		    text-align: center;
+		    font-size: 15px;
+		    cursor: pointer;
+		}
+		.button:hover {
+			background-color: black;
+			color: white;
+			border-color: white;
+		}
+
+ 		.profile {
+ 		      display: flex;
+              background-color: white;
+              box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+              padding: 20px 100px;
+        }
+        img {
+            width: 200px;
+            border-radius: 10%;
+        }
+        .container {
+          text-align: left;
+          padding-left: 30px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="profile">
+        {% if user.username == current_user.username %}<a href="{{ url_for('edit_profile') }}">{% endif %}<img src="{{ userpic }}"></a>
+        <div class="container">
+        <h1 id="username">{{ user.username }}</h1>
+        {% if user.about_me %}<p> {{ user.about_me }} </p>{% endif %}
+        </div>
+        <aside>
+			{% if user.username == current_user.username %}<a href="{{ url_for('add_photo') }}"><button class="button"> Add new photo </button></a>
+            {% else %}
+            <input id="followButton" class="button" type="button"
+                {% if current_user.is_following(user) %} value="Unfollow" {% else %} value="Follow" {% endif %}></input>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+            <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+            {% endif %}
+			<a href="{{ url_for('index', username=current_user.username)}}"><button class="button"> Main page </button></a>
+			<a href="{{ url_for('logout') }}"><button class="button"> Log Out </button></a>
+
+		</aside>
+
+    </div>
+    <p>
+        {% for post in posts %}
+        <b><img src="{{ url_for('static', filename=post.photo) }}"></b>
+        {% endfor %}
+    </p>
+</body>
+</html>

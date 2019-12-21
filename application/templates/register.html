@@ -1,0 +1,153 @@
+<html>
+ <head>
+ 	<title>PhotoShoot</title>
+ 	<style>
+ 		@media (min-width: 600px) {
+ 			body {
+	 			background: url(https://images.iphotography.com/wp-content/uploads/2019/08/06143248/2.1.jpg) no-repeat center center fixed;
+	 			background-size: cover;
+	 			margin: 0;
+			    letter-spacing: 0.18em;
+			    font-family: 'URW Bookman L', serif;
+			    text-transform: uppercase;
+			}
+ 		}
+ 		@media not screen, (max-width: 600px) {
+ 			body {
+	 			background-color: black;
+	 			margin: 0;
+			    letter-spacing: 0.18em;
+			    font-family: 'URW Bookman L', serif;
+			    text-transform: uppercase;
+			}
+ 		}
+		#header_nav {
+		    position: relative;
+		    background: rgba(217,217,217,.2);
+		}
+ 		.header_list {
+ 			display: flex;
+ 			justify-content: space-between;
+		    list-style: none;
+			margin: 0 3em;
+		}
+		.header_list:after {
+  			content: "";
+  			display: table;
+  			clear: both;
+		}
+		.header_list a {
+ 			text-decoration: none;
+			display: block;
+			padding: 0 5.8em;
+			line-height: 3.5em;
+			font-size: 1em;
+			color: white;
+		}
+		.navbar-logo {
+			display: block;
+			width: 7em;
+		}
+		.header_list a:hover {
+		    background: rgba(255,255,255,.3);
+		}
+
+		* {box-sizing: border-box;}
+		.form-inner {
+		    position: relative;
+		    max-width: 37.5em;
+		    padding: 3.5em 1.7em;
+		    margin: 2.5em auto 0;
+		}
+		.form-inner h3 {
+		    position: relative;
+		    margin-top: 0;
+		    text-align: center;
+			color: white;
+		    font-weight: 300;
+		    font-size: 1.65em;
+		}
+		.form-inner h3::after {
+		    content: "";
+		    position :absolute;
+		    left: 8.1em;
+		    bottom: -0.13em;
+		    height: 0.07em;
+		    width: 4.22em;
+		    background: white;
+		}
+		.form-inner label {
+		    display: block;
+		    padding-left: 1em;
+		    color: white;
+		    text-transform: uppercase;
+		    font-size: 0.9em;
+		}
+		.form-inner input {
+		    display: block;
+		    width: 100%;
+		    padding: 0 0.9em;
+		    margin: 1em 0 1em;
+		    border-width: 0;
+		    line-height: 3.5em;
+		    border-radius: 1.7em;
+		    color: white;
+		    background: rgba(255,255,255,.2);
+		}
+		.form-inner input:invalid {
+			background: rgba(255,0,0,.2);
+		}
+		.form-inner input[type="submit"] {background: white; color: black;}
+ 	</style>
+ </head>
+ <body>
+ 	<header>
+ 		<nav id="header_nav">
+ 			<ul class = "header_list">
+ 				<li><a href= "{{ url_for('login') }}">Sign in</a></li>
+ 				<li><a href= "#">Function</a></li>
+ 				<li><img class="navbar-logo" alt="logo" src="{{ url_for('static', filename='assets/mountains-logo-white.png') }}"></li>
+ 				<li><a href= "#">Help</a></li>
+ 				<li><a href= "#">Why PhotoShoot?</a></li>
+ 			</ul>
+ 		</nav>
+ 	</header>
+ 	<main>
+ 		<form action="" method="post">
+		   <div class="form-inner">
+		    <h3>Sign up</h3>
+			    {{ form.hidden_tag() }}
+            <p>
+                {{ form.username.label }}<br>
+                {{ form.username(size=32) }}
+                {% for error in form.username.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+            </p>
+            <p>
+                {{ form.email.label }}<br>
+                {{ form.email(size=32) }}
+                {% for error in form.email.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+            </p>
+            <p>
+                {{ form.password.label }}<br>
+                {{ form.password(size=32) }}
+                {% for error in form.password.errors %}
+                 <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+            </p>
+            <p>
+                {{ form.password2.label }}<br>
+                {{ form.password2(size=32) }}
+                {% for error in form.password2.errors %}
+                 <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+            </p>
+            <p>{{ form.submit() }}</p>
+		  </div>
+		</form>
+ 	</main>
+ </body>
+ </html>
